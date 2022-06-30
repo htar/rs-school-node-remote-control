@@ -1,6 +1,7 @@
 import WebSocket, { createWebSocketStream } from 'ws';
-import { parseData } from '../utils/parseData';
-import { mouseMove } from './mouseMove';
+import mouseEvent from './events/mouseEvent';
+import drawEvent from './events/drawEvent';
+import screenshot from './events/screenshot';
 
 export const connections = (ws: WebSocket) => {
 	const wsStream = createWebSocketStream(ws, {
@@ -9,10 +10,18 @@ export const connections = (ws: WebSocket) => {
 	});
 
 	wsStream.on('data', async (chunk: string) => {
-		const [command, param1] = await parseData(chunk);
-
 		if (chunk.includes('mouse_')) {
-			return mouseMove(command, param1, wsStream);
+			console.log('mouseEvent', chunk);
+			return mouseEvent(chunk, wsStream);
+		}
+		if (chunk.includes('draw_')) {
+			console.log('drawEvent', chunk);
+
+			return drawEvent(chunk, wsStream);
+		}
+		if (chunk.includes('rnt_scrn')) {
+			console.log('screenshot', chunk);
+			return screenshot(chunk, wsStream);
 		}
 	});
 
