@@ -20,6 +20,7 @@ const circle = (radius: number, eventX: number, eventY: number) => {
 		dragMouse(x, y);
 		if (i === 0) mouseToggle('down');
 	}
+	mouseToggle('up');
 };
 
 const drawRectangle = (
@@ -29,21 +30,23 @@ const drawRectangle = (
 	eventY: number
 ) => {
 	setMouseDelay(80);
+	mouseToggle('down');
 	moveMouse(eventX + width, eventY);
 	moveMouse(eventX + width, eventY + length);
 	moveMouse(eventX, eventY + length);
 	moveMouse(eventX, eventY);
-	mouseToggle('down');
+	mouseToggle('up');
 };
 
 const square = (width: number, eventX: number, eventY: number) => {
 	setMouseDelay(80);
 
+	mouseToggle('down');
 	moveMouse(eventX + width, eventY);
 	moveMouse(eventX + width, eventY + width);
 	moveMouse(eventX, eventY + width);
 	moveMouse(eventX, eventY);
-	mouseToggle('down');
+	mouseToggle('up');
 };
 
 const drawEvent = (chunk: string, wsStream: internal.Duplex) => {

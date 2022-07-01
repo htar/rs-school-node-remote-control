@@ -9,13 +9,12 @@ export const wsServer = () => {
 	wss.on('connection', (ws: WebSocket) => {
 		console.log('WS Client connected');
 		ws.on('message', (message: string) => {
-			console.log('received: %s', message);
 			connections(ws);
 		});
 		ws.send('something');
 
 		ws.on('error', (error) => {
-			console.log('Some Error occurred', error);
+			console.log('connection Error', error);
 		});
 	});
 
