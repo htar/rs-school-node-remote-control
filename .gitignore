@@ -5,12 +5,18 @@
 .DS_Store
 Thumbs.db
 [Dd]esktop.ini
+.env
 
 # Links
 *.lnk
-.idea/
+.idea/*
 *.PEM
-.vscode/
-
+.history/*
+.vscode/*
+.bin/*
+.vscode/*
+/dist/*
 # Logs
 npm-debug.log
+yarn.lock
+package-lock.json
